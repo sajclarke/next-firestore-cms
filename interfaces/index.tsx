@@ -34,6 +34,12 @@ export interface IProfile {
   skills?: { label: string; value: string }[]
 }
 
+export interface IFormInputs {
+  id?: string
+  title: string
+  description: string
+}
+
 export interface IPost {
   id: string
   title: string
