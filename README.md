@@ -21,7 +21,10 @@ yarn dev
 - [x] Setup firebase configuration
 - [x] Add TailwindCSS
 - [x] Add Firebase and display content from firestore
+- [ ] Use SWR for data fetching
 - [ ] CRUD content using firestore
+- [ ] Use Markdown in posts
+- [ ] Upload images
 
 ## Before you start
 
