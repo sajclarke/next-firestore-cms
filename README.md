@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next Firestore Content Management System
 
-## Getting Started
+This repo is an example of using Firestore (www.firebase.com) as a Content Management System
 
-First, run the development server:
+## Quickstart
 
-```bash
-npm run dev
-# or
+```sh
+# Install dependencies
+yarn install
+
+# Enable husky
+yarn husky install
+
+# Start dev server
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Roadmap
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- [x] Configure init NextJS website (with Typescript)
+- [x] Setup firebase configuration
+- [x] Add TailwindCSS
+- [x] Add Firebase and display content from firestore
+- [ ] CRUD content using firestore
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Before you start
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Setup new project on firebase.com
+- Download the firebase config settings
+- Download the service account for firebase admin sdk
+- Enable the Cloud Firestore
+- Enable Email/Password Authentication (Authentication > Sign-in method > Sign-in providers)
+- Enable Github Authentication [see instructions](https://firebase.google.com/docs/auth/web/github-auth?authuser=0)
 
-## Learn More
+## Setup Instructions
 
-To learn more about Next.js, take a look at the following resources:
+- Clone repo to local machine
+- Copy your firebase config settings to `.env.example` file
+- Rename `.env.example` to `.env`
+- Install dependencies using `yarn`
+- Run locally using `yarn dev`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy Instructions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Build for production using `yarn build`
+- Upload to hosting provider of choice
