@@ -1,12 +1,9 @@
-// import type { NextPage } from 'next'
-import useSWR from 'swr'
 import * as React from 'react'
-// import { useRouter } from 'next/router'
-// import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { getPosts, addPost, updatePost } from './api/db'
-import { IPost, IFormInputs } from '../interfaces/'
+import useSWR from 'swr'
+import { IPost, IFormInputs } from '../../interfaces/'
 import PostForm from '@components/forms/PostForm'
 import Post from '@components/Post'
+import { getPosts, addPost, updatePost } from '../api/db'
 
 export async function getStaticProps() {
   // `getStaticProps` is executed on the server side.
@@ -20,7 +17,7 @@ export async function getStaticProps() {
   }
 }
 
-function Home() {
+function Posts() {
   const { data, error, mutate: refreshPosts } = useSWR('/api/posts')
 
   const [currentPost, setCurrentPost] = React.useState<IPost | null>(null)
@@ -57,4 +54,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Posts
