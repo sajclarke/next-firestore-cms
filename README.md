@@ -1,6 +1,6 @@
 # Next Firestore Content Management System
 
-This repo is an example of using Firestore (www.firebase.com) as a Content Management System
+This repo is an example of using Firebase v9 (www.firebase.com) as a Content Management System with NextJS, Typescript and TailwindCSS
 
 ## Quickstart
 

@@ -15,7 +15,7 @@ import {
   DocumentData,
   // serverTimestamp,
 } from 'firebase/firestore'
-import { IPost } from '../../interfaces'
+import { IFormInputs, IPost } from '../../interfaces'
 
 type UserData = {
   email: string
@@ -152,12 +152,31 @@ export const getPost = async (postId?: string) =>
     }
   }
 
-export const addPost = async (data: IPost) =>
+export const addPost = async (data: IFormInputs) =>
   // req: NextApiRequest,
   // res: NextApiResponse<Data>
   {
     try {
       const docRef = await addDoc(collection(firestore, 'posts'), {
+        ...data,
+        createdAt: new Date().toLocaleDateString(),
+      })
+      console.log('Post created with id: ', docRef)
+    } catch (e) {
+      console.error('Error adding document: ', e)
+    }
+  }
+
+export const updatePost = async (data: IFormInputs) =>
+  // req: NextApiRequest,
+  // res: NextApiResponse<Data>
+  {
+    if (!data.id) {
+      return
+    }
+
+    try {
+      const docRef = await updateDoc(doc(firestore, 'posts', data.id), {
         ...data,
       })
       console.log('Post created with id: ', docRef)

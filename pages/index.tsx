@@ -1,8 +1,12 @@
 import type { NextPage } from 'next'
-import Link from 'next/link'
+// import Link from 'next/link'
+import * as React from 'react'
+import { useRouter } from 'next/router'
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { getPosts } from './api/db'
-import { IPost } from '../interfaces/'
+import { getPosts, addPost, updatePost } from './api/db'
+import { IPost, IFormInputs } from '../interfaces/'
+import PostForm from '@components/forms/PostForm'
+import Post from '@components/Post'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { res } = context
@@ -18,35 +22,39 @@ const Home: NextPage = ({
   posts,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   // console.log(posts)
+  const router = useRouter()
+
+  const [currentPost, setCurrentPost] = React.useState<IPost | null>(null)
+
+  const handlePost = (data: IFormInputs) => {
+    // console.log(data)
+    if (data.id) {
+      updatePost(data)
+    } else {
+      addPost(data)
+    }
+
+    refreshData()
+  }
+
+  const handleClickPost = (data: IPost) => {
+    console.log(data)
+    setCurrentPost(data)
+  }
+
+  const refreshData = () => {
+    //Hacky method of refreshing the page using server side data
+    router.replace(router.asPath)
+  }
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
+        <PostForm
+          onSave={handlePost}
+          initialValues={currentPost ? { post: currentPost } : null}
+        />
         {posts.map((post: IPost) => (
-          <div key={post.id} className="py-8 flex flex-wrap md:flex-nowrap">
-            <div className="md:flex-grow">
-              <h2 className="text-2xl font-medium text-gray-900 title-font mb-2">
-                {post.title}
-              </h2>
-              <p className="leading-relaxed">{post.description}</p>
-              <Link href={`/posts/${post.id}`} passHref>
-                <a className="text-indigo-500 inline-flex items-center mt-4">
-                  Learn More
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12h14"></path>
-                    <path d="M12 5l7 7-7 7"></path>
-                  </svg>
-                </a>
-              </Link>
-            </div>
-          </div>
+          <Post key={post.id} post={post} onClick={handleClickPost} />
         ))}
       </div>
     </section>
