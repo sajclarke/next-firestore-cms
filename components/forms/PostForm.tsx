@@ -100,8 +100,8 @@ const PostForm = (props: FormProps) => {
   const customRendererOptions = React.useMemo(() => {
     return {
       shortcuts: { toggleFullScreen: null, toggleSideBySide: null },
-      // showIcons: ['table', 'image-upload'],
-      // hideIcons: ['image', 'side-by-side', 'fullscreen'],
+      showIcons: ['table', 'upload-image'],
+      hideIcons: ['image', 'side-by-side', 'fullscreen'],
       uploadImage: true,
       imageUploadFunction: onUploadImage,
     } as SimpleMDE.Options
