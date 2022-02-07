@@ -1,7 +1,13 @@
 // import db from "@utils/adminApp";
 // import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { firestore } from '@utils/clientApp'
+import {
+  firestore,
+  storage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from '@utils/clientApp'
 import {
   collection,
   query,
@@ -24,6 +30,34 @@ type UserData = {
   photoUrl: string
   skills?: string[]
   bio?: string
+}
+
+export const uploadImage = async (file: File) => {
+  // Create the file metadata
+
+  const metadata = {
+    contentType: 'image/jpeg',
+  }
+
+  // Upload file and metadata to the object 'images/mountains.jpg'
+  const storageRef = ref(storage, 'images/' + file.name)
+  // const uploadTask = uploadBytes(storageRef, file)
+  return new Promise(async (resolve, reject) => {
+    uploadBytesResumable(storageRef, file, metadata)
+      .then((snapshot) => {
+        console.log('Uploaded', snapshot.totalBytes, 'bytes.')
+        console.log('File metadata:', snapshot.metadata)
+        // Let's get a download URL for the file.
+        getDownloadURL(snapshot.ref).then((url: string) => {
+          console.log('File available at', url)
+          resolve(url.toString())
+        })
+      })
+      .catch((error) => {
+        console.error('Upload failed', error)
+        reject(error.toString())
+      })
+  })
 }
 
 export const getAllUsers = async () => {

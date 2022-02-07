@@ -8,12 +8,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.22.2",
+    "@editorjs/header": "^2.6.2",
+    "@editorjs/image": "^2.6.2",
+    "@editorjs/list": "^1.6.2",
+    "@editorjs/paragraph": "^2.8.0",
     "@hookform/resolvers": "^2.8.5",
+    "@tailwindcss/typography": "^0.5.1",
+    "@types/editorjs__header": "^2.6.0",
     "firebase": "^9.6.2",
     "firebase-admin": "^10.0.1",
     "next": "12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-editor-js": "^2.0.6",
     "react-hook-form": "^7.22.5",
     "swr": "^1.1.2",
     "yup": "^0.32.11"
