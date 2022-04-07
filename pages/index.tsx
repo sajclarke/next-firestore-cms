@@ -11,10 +11,13 @@ import Post from '@components/Post'
 export async function getStaticProps() {
   // `getStaticProps` is executed on the server side.
   const posts = await getPosts()
+  console.log(await getPosts())
+  // const posts = []
   return {
     props: {
+      // posts,
       fallback: {
-        '/api/posts': posts,
+        '/api/posts': JSON.stringify(posts),
       },
     },
   }
@@ -42,6 +45,7 @@ function Home() {
   }
   if (error) return <div>An error has occurred.</div>
   if (!data) return <div>loading...</div>
+  // console.log(data)
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">

@@ -11,7 +11,7 @@ import {
 import {
   collection,
   query,
-  // where,
+  where,
   doc,
   addDoc,
   updateDoc,
@@ -185,6 +185,41 @@ export const getPost = async (postId?: string) =>
       console.error('Error adding document: ', e)
     }
   }
+
+export const getWhere = async (slug?: string) => {
+  if (!slug) {
+    return
+  }
+  //Create user if they do not already exist
+  try {
+    // const docRef = collection(firestore, 'posts')
+    // const docSnap = await getDocs(query(docRef, where('slug', '==', slug)))
+    // console.log(docSnap)
+    const q = query(collection(firestore, 'posts'), where('slug', '==', slug))
+
+    const docSnap = await getDocs(q)
+    // docSnap.forEach((doc) => {
+    //   console.log(doc.id, ' => ', doc.data())
+    //   return doc.data()
+    // })
+    const result: DocumentData[] = []
+    docSnap.forEach((snapshot) => {
+      result.push(snapshot.data())
+    })
+    // set it to state
+    // setTodos(result)
+    return result
+    // if (docSnap.exists()) {
+    //   // console.log('Document data:', docSnap.data())
+    //   return { ...docSnap.data() }
+    // } else {
+    //   // doc.data() will be undefined in this case
+    //   console.log('No such document!')
+    // }
+  } catch (e) {
+    console.error('Error finding document: ', e)
+  }
+}
 
 export const addPost = async (data: IFormInputs) =>
   // req: NextApiRequest,

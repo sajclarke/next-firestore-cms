@@ -1,10 +1,7 @@
-import { useCallback, useRef, Fragment } from 'react'
+import { useCallback, useRef } from 'react'
 import { createReactEditorJS } from 'react-editor-js'
-import Header from '@editorjs/header'
-import List from '@editorjs/list'
-import Image from '@editorjs/image'
-
-import { uploadImage, addPost } from 'pages/api/db'
+import EditorTools from './EditorConstants'
+import { addPost } from 'pages/api/db'
 
 const Editor = () => {
   const ReactEditorJS = createReactEditorJS()
@@ -23,38 +20,11 @@ const Editor = () => {
   }, [])
 
   return (
-    <Fragment>
+    <div className="prose  lg:prose-xl">
       <ReactEditorJS
         onInitialize={handleInitialize}
-        tools={{
-          header: Header,
-          list: { class: List },
-          image: {
-            class: Image,
-            config: {
-              uploader: {
-                async uploadByFile(file: File) {
-                  // let storageRef = firebase.storage().ref()
-                  // let imagesRef = storageRef
-                  //   .child('EditorJS')
-                  //   .child('images/' + file.name)
-                  // let metadata = {
-                  //   contentType: 'image/jpeg',
-                  // }
-                  // let uploadTask = await imagesRef.put(file, metadata)
-                  // const downloadURL = await uploadTask.ref.getDownloadURL()
-                  const downloadURL = await uploadImage(file)
-                  return {
-                    success: 1,
-                    file: {
-                      url: downloadURL,
-                    },
-                  }
-                },
-              },
-            },
-          },
-        }}
+        // readOnly
+        tools={EditorTools}
         defaultValue={{
           time: 1635603431943,
           blocks: [
@@ -175,7 +145,7 @@ const Editor = () => {
       <button className="px-4 py-2 shadow bg-white" onClick={handleSave}>
         Save
       </button>
-    </Fragment>
+    </div>
   )
 }
 

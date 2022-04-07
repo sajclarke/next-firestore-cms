@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { SWRConfig } from 'swr'
 import type { AppProps } from 'next/app'
+import { AuthProvider } from '../context/auth'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,7 +12,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           fetch(resource, init).then((res) => res.json()),
       }}
     >
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </SWRConfig>
   )
 }
