@@ -21,7 +21,7 @@ function MyPage() {
     // register,
     handleSubmit,
     control,
-    formState: { errors },
+    // formState: { errors },
     reset,
     // setValue,
   } = useForm<IFormInputs>({
@@ -61,9 +61,9 @@ function MyPage() {
         control={control}
         name="description"
         render={({
-          field: { onChange, onBlur, value, name, ref },
-          fieldState: { invalid, isTouched, isDirty, error },
-          formState,
+          field: { onChange, value },
+          // fieldState: { invalid, isTouched, isDirty, error },
+          // formState,
         }) => <RichTextEditor value={value} onChange={onChange} />}
       />
       <button

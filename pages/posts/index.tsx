@@ -7,7 +7,7 @@ import { getPosts, addPost, updatePost } from '../api/db'
 
 export async function getStaticProps() {
   // `getStaticProps` is executed on the server side.
-  const posts = await getPosts()
+  // const posts = await getPosts()
   return {
     props: {
       // fallback: {
