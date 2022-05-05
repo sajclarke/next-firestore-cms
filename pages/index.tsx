@@ -13,9 +13,9 @@ export async function getStaticProps() {
   const posts = await getPosts()
   return {
     props: {
-      fallback: {
-        '/api/posts': posts,
-      },
+      // fallback: {
+      //   '/api/posts': posts,
+      // },
     },
   }
 }

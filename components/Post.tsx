@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import RichTextEditor from '@components/RTEditor'
 import { IPost } from '../interfaces/'
 
 interface IProps {
@@ -13,8 +14,12 @@ const Post = ({ post, onClick }: IProps) => {
         <h2 className="text-2xl font-medium text-gray-900 title-font mb-2">
           {post.title}
         </h2>
-        <p className="leading-relaxed">{post.description}</p>
-
+        {/* <p className="leading-relaxed">{post.description}</p> */}
+        <RichTextEditor
+          value={post.description}
+          readOnly
+          onChange={console.log}
+        />
         <Link href={`/posts/${post.id}`} passHref>
           <a className="text-indigo-500 inline-flex items-center mt-4">
             Learn More
