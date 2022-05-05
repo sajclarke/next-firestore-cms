@@ -48,6 +48,7 @@ const PostForm = (props: FormProps) => {
       setValue('title', props.initialValues.post?.title)
       setValue('description', props.initialValues.post?.description)
     }
+    //eslint-disable-next-line
   }, [props.initialValues])
 
   return (
