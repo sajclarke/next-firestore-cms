@@ -1,11 +1,13 @@
 // import type { NextPage } from 'next'
 import useSWR from 'swr'
 import * as React from 'react'
+import type { ReactElement } from 'react'
 // import { useRouter } from 'next/router'
 // import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import { addPost, updatePost } from './api/db'
 import { IPost, IFormInputs } from '../interfaces/'
 import PostForm from '@components/forms/PostForm'
+import Layout from '@components/layouts/SiteWrapper'
 import Post from '@components/Post'
 
 export async function getStaticProps() {
@@ -55,6 +57,10 @@ function Home() {
       </div>
     </section>
   )
+}
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>
 }
 
 export default Home
